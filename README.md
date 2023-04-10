@@ -1,7 +1,7 @@
 # The Esoteric Exponent
 ### A satirical website that's completely made by AI.
 
-Online preview: (coming soon) 
+Online preview: https://micaloveskpop.github.io/The-Esoteric-Exponent/
 
 - The HTML? Coded by GPT-3/4
 - The CSS? Coded by GPT-3/4
