@@ -1,5 +1,5 @@
 # The-Esoteric-Exponent
-##A satirical website that's completely made by AI##
+##A satirical website that's completely made by AI
 
 - The HTML? Coded by GPT-3/4
 - The CSS? Coded by GPT-3/4
