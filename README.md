@@ -9,3 +9,5 @@
 - The images? Rendered by DALL-E
 
 As for the article topics, minimal input was given. The creative brain behind the articles on this website is GPT-4 in the form of Bing Chat. And as for the article titles, images, author bioses and author images are all derived from the article they belong to.
+
+GPT-3 refers to ChatGPT. GPT-4 refers to Bing Chat. DALL-E refers to Bing Create.
