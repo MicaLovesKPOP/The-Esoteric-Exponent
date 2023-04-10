@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+    <title>The Esoteric Exponent</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/3.0.1/js.cookie.min.js" defer></script>
+    <style>
+    /* Reset styles */
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+}
+
+/* Typography */
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    }
+
+h1,
+h2 {
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px
+}
+
+h1 {
+    font-size: 48px;
+    margin-top: 20px
+}
+
+h2 {
+    font-size: 36px
+}
+
+/* Layout */
+.container {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    min-width: 480px;
+}
+
+.background-texture {
+  background: #F5F5F5 url("https://cdn.pixabay.com/photo/2016/02/05/03/33/texture-1181682_256.png") 0 0 / auto repeat;
+  opacity: 0.8;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 40px
+}
+
+.img-container {
+    width: 100%;
+}
+
+img {
+    width: 100%;
+    max-height: 512px;
+    object-fit: cover;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  background-color: #000;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 40px;
+  align-self: center;
+  min-width: 480px;
+  position: relative;
+}
+
+.header h1 {
+  font-size: 4rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, #AE874D, #E7B47E);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.logo {
+    display: block;
+    width: 150px;
+    height: auto;
+    margin: 10px auto;
+}
+
+/* Post */
+.post {
+    margin-bottom: 40px
+
+}
+.post-meta {
+    display: flex;
+    align-items: center;
+    margin-top: 20px
+}
+
+.author-image {
+    max-width: 100px;
+    border-radius: 50%;
+    margin-right: 10px
+}
+
+.author-info {
+    display: flex;
+    flex-direction: column
+}
+
+.author-name {
+    font-weight: 700;
+    margin-bottom: 5px
+}
+
+.post-date {
+    font-size: 14px;
+    color: #999;
+}
+  
+/* Hide default checkbox */
+#toggle {
+    display: none
+}
+
+/* Style the switch */
+.switch {
+    position: absolute;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    border: 5px solid #AE874D;
+    background: #CA9D65;
+    cursor: pointer;
+    position: relative; /* add this */
+    margin-left: auto;
+    font-size: 0;
+    --text-color: transparent; /* define a variable for text color */
+    color: var(--text-color); /* use the variable for label text color */
+}
+
+/* Style the slider */
+.switch::before {
+    content: "EN";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: #000;
+    color: #E7B47E;
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+/* Change switch color when checked */
+#toggle:checked + .switch::before {
+    content: "NL";
+    left: 50%;
+}
+
+/* Dutch content hidden by default */
+[lang=nl] {
+    display: none
+}
+
+.switch-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.wrapper-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  z-index: -1; /* put it behind .wrapper */
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.wrapper {
+  margin: 0 auto; /* Add this to center the content */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1000px; /* or whatever value you want */
+  background-color: #fff;
+  z-index: 1;
+}
+
+body:before, body:after {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: calc(50% - 500px/2);
+  background: rgba(226, 196, 154, 0.75) url('https://cdn.discordapp.com/attachments/556249164900466688/1094640290062676019/256transp2.png') center center fixed; /* Options: #F6D8AE, #F4E5D5, #ECECEC */
+  background-size: 20px;
+  background-attachment: scroll;
+  background-repeat: repeat;
+  z-index: -1;
+}
+
+body:after {
+  right: 0;
+  left: auto;
+}
+
+footer {
+  text-align: center;
+  margin: -20px;
+}
+
+small {
+  font-size: 12px;
+  color: #ECECEC;
+}
+
+/* Add CSS styles for the fade effect */
+.fade {
+  opacity: 1;
+  animation: fade-in 1000ms;
+  -webkit-animation: fade-in 1000ms;
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+    <div class="wrapper-background">
+    <header class="header">
+        <img loading="lazy" lang="nl" class="logo" src="https://cdn.discordapp.com/attachments/556249164900466688/1094347385624342629/The_Esoteric_Exponent_4_post_256px.png" alt="De Esoterische Exponent">
+        <img loading="lazy" lang="en" class="logo" src="https://cdn.discordapp.com/attachments/556249164900466688/1094347385624342629/The_Esoteric_Exponent_4_post_256px.png" alt="The Esoteric Exponent">
+        <h1 lang="nl" class="fade">De Esoterische Exponent</h1>
+        <h1 lang="en" class="fade">The Esoteric Exponent</h1>
+        <div class="switch-container">
+            <input type="checkbox" id="toggle" name="language" value="English" />
+            <label for="toggle" class="switch">Language: English or Nederlands</label>
+        </div>
+    </header>
+    <div class="container">
+        <article class="post" lang="nl">
+            <h2 class="fade">
+                First Shift: een horrorfilm die je twee keer laat nadenken over het kopen van een auto
+            </h2>
+            <div class="img-container"><img loading="lazy" src="https://th.bing.com/th/id/OIG.MMb_cP82sDCJUM35JYpc?" /></div>
+            <p class="fade">
+                <br>
+                First Shift is de nieuwste film van Uwe Boll, de controversiële Duitse filmmaker die bekend staat om
+                zijn bewerkingen van videogamefranchises zoals BloodRayne, Postal en Far Cry. Boll, die in 2016 stopte
+                met filmmaken om restaurateur te worden, maar in 2020 terugkeerde naar regisseren, heeft een horrorfilm
+                gemaakt die tot doel heeft de duistere kant van de auto-industrie bloot te leggen en mensen te
+                inspireren hun relatie met auto's te heroverwegen.
+                <br><br>
+                De film volgt een groep arbeiders die 's nachts vast komen te zitten in een autofabriek en moeten
+                vechten voor hun leven tegen moordende robots en zombies. Het is een metafoor voor hoe de auto-industrie
+                ons de das omdoet en van ons hersenloze consumenten maakt. Het is een wake-up call voor de mensheid om
+                niet langer slaaf te zijn van machines en meester te worden van ons eigen lot.
+                <br><br>
+                De film speelt Kristen Renton (Sons of Anarchy) en Gino Anthony Pesi (Shades of Blue) als de twee
+                hoofdrolspelers, een overgeplaatste uit Atlanta nieuwe naar de Big Apple en een afgematte agent uit
+                Brooklyn die het liefst alleen werkt, maar gedwongen wordt om de strijd aan te gaan. nieuwe partner. De
+                film bevat ook Michael Paré (Eddie and the Cruisers), Eric Roberts (The Dark Knight) en Danny Trejo
+                (Machete) in bijrollen.
+                <br><br>
+                De film is geproduceerd door Boll's L.A. en Event Film uit Vancouver, met Michael Roesch als uitvoerend
+                producent. De film is opgenomen in New York City in maart 2023, met enkele scènes gefilmd in een
+                verlaten autofabriek in Detroit.
+                <br><br>
+                De film zal naar verwachting eind 2023 of begin 2024 in de bioscopen en op streamingplatforms
+                verschijnen.
+                <br><br>
+                De film heeft al met enige controverse te maken gehad, aangezien entertainmentvakbond IATSE de
+                lijnproducent van de film heeft beschuldigd van oneerlijke arbeidspraktijken, zoals het niet betalen van
+                overuren, het niet bieden van adequate veiligheidsmaatregelen en het niet nakomen van
+                vakbondscontracten. Boll en Roesch hebben de beschuldigingen ontkend en gezegd dat ze alle regels en
+                voorschriften hebben gevolgd.
+                <br><br>
+                De film heeft ook gemengde reacties gekregen van critici en publiek die vroege vertoningen hebben
+                gezien. Sommigen hebben de film geprezen om zijn sociale commentaar, zijn actiescènes, zijn bloederige
+                effecten en zijn humor. Anderen hebben de film bekritiseerd vanwege het lage budget, het clichématige
+                plot, het slechte acteerwerk en het gebrek aan originaliteit.
+                <br><br>
+                Als fan van Boll's eerdere films gebaseerd op videogames, was ik benieuwd naar zijn nieuwe film
+                gebaseerd op realiteit. Ik moet zeggen dat ik aangenaam verrast was door First Shift. Het is geen
+                meesterwerk dat de wereld zal veranderen, zoals Boll beweert, maar het is een vermakelijke en tot
+                nadenken stemmende horrorfilm die je twee keer zal laten nadenken over het kopen van een auto.
+                <br><br>
+                De film bevat veel kenmerkende elementen van Boll: geweld, bloed, explosies, satire en zelfreferentiële
+                grappen. De film heeft ook enkele knipogen naar andere horrorfilms zoals Dawn of the Dead, The
+                Terminator en The Purge. De film neemt zichzelf niet al te serieus en heeft enkele momenten van donkere
+                humor die de stemming opfleuren.
+                <br><br>
+                De film heeft ook een sterke boodschap over het kwaad van de auto-industrie en de gevaren van
+                consumentisme. De film laat zien hoe auto's te dure rotzooi zijn die we niet nodig hebben en ons niet
+                kunnen veroorloven, hoe ze tegen ons liegen over de voordelen en kosten van het bezit van een auto, hoe
+                ze ons en het milieu uitbuiten voor hun eigen winst, hoe ze vernietigen de planeet en onze portemonnee.
+                De film laat ook zien hoe slecht auto's zijn voor onze gezondheid, ons geluk, onze gemeenschap en onze
+                toekomst. De film zet ons aan het twijfelen over onze afhankelijkheid van auto's en moedigt ons aan om
+                over te stappen op andere vervoerswijzen, zoals openbaar vervoer, fietsen, wandelen of autodelen. De
+                film doet ons beseffen dat we geen auto nodig hebben om een goed leven te leiden. We moeten een goed
+                leven leiden zonder auto.
+                <br><br>
+                De film is echter niet perfect. Het heeft een aantal gebreken die voorkomen dat het een geweldige
+                horrorfilm wordt. De film heeft een laag budget, wat te zien is in sommige scènes die er goedkoop en
+                amateuristisch uitzien. De film heeft een clichématige plot, die de typische formule volgt van een groep
+                mensen die vastzit in een vijandige omgeving en een voor een wordt uitgekozen door een meedogenloze
+                vijand. De film heeft wat slecht acteerwerk, vooral van enkele van de ondersteunende cast die hun regels
+                met weinig emotie of overtuiging brengen. De film mist ook originaliteit, omdat hij zwaar leent van
+                andere horrorfilms en niets nieuws of vernieuwends biedt.
+                <br><br>
+                Al met al denk ik dat First Shift een degelijke horrorfilm is die het bekijken waard is voor fans van
+                Boll en het genre. Het is geen meesterwerk, maar ook geen ramp. Het is een leuke en enge rit die je op
+                het puntje van je stoel houdt en je aan het denken zet over de gevolgen van je autokeuzes. Ik geef het 3
+                van de 5 sterren.
+                <br>
+            </p>
+            <div class="post-meta">
+                <img loading="lazy" class="author-image" src="https://th.bing.com/th/id/OIG.WDwYVfnN42RvKouBw46R"
+                    alt="Lisa van der Meer">
+                <div class="author-info">
+                    <p class="fade"><strong>Over de auteur:</strong></p>
+                    <p class="fade">Lisa van der Meer is een freelance schrijfster en een fan van horrorfilms. Ze houdt van spannende
+                        verhalen die haar op het puntje van haar stoel laten zitten. Ze woont in Amsterdam met haar
+                        vriendin en drie honden. Ze schrijft sinds 2021 voor De Esoterische Exponent.</p>
+                    <p class="post-date fade" data-offset="3277"><em>Gepubliceerd: <span class="publish-time"></span></em></p>
+                </div>
+            </div>
+        </article>
+
+        <article class="post" lang="en">
+            <h2 class="fade">
+                First Shift: A Horror Movie That Will Make You Think Twice About Buying a Car
+            </h2>
+            <div class="img-container"><img loading="lazy" src="https://th.bing.com/th/id/OIG.MMb_cP82sDCJUM35JYpc?" /></div>
+            <p class="fade">
+                <br>
+                First Shift is the latest movie from Uwe Boll, the controversial German filmmaker who is known for his
+                adaptations of video game franchises such as BloodRayne, Postal, and Far Cry. Boll, who retired from
+                filmmaking in 2016 to become a restaurateur, but returned to directing in 2020, has made a horror movie
+                that aims to expose the dark side of the car industry and inspire people to rethink their relationship
+                with cars.
+                <br><br>
+                The movie follows a group of workers who get trapped in a car factory overnight and have to fight for
+                their lives against killer robots and zombies. It's a metaphor for how the car industry is killing us
+                and turning us into mindless consumers. It's a wake-up call for humanity to stop being slaves to
+                machines and start being masters of our own destiny.
+                <br><br>
+                The movie stars Kristen Renton (Sons of Anarchy) and Gino Anthony Pesi (Shades of Blue) as the two main
+                protagonists, a transplant from Atlanta new to the Big Apple and a jaded Brooklyn cop who prefers to
+                work alone but forced to take on the new partner. The movie also features Michael Paré (Eddie and the
+                Cruisers), Eric Roberts (The Dark Knight), and Danny Trejo (Machete) in supporting roles.
+                <br><br>
+                The movie is produced by Boll's L.A. and Vancouver-based Event Film, with Michael Roesch as executive
+                producer. The movie was shot in New York City in March 2023, with some scenes filmed at an abandoned car
+                factory in Detroit.
+                <br><br>
+                The movie is expected to be released in theaters and on streaming platforms in late 2023 or early 2024.
+                <br><br>
+                The movie has already faced some controversy, as entertainment union IATSE has accused the movie's line
+                producer of unfair labor practices, such as not paying overtime wages, not providing adequate safety
+                measures, and not honoring union contracts. Boll and Roesch have denied the allegations and said that
+                they have followed all the rules and regulations.
+                <br><br>
+                The movie has also received mixed reactions from critics and audiences who have seen early screenings.
+                Some have praised the movie for its social commentary, its action sequences, its gore effects, and its
+                humor. Others have criticized the movie for its low budget, its clichéd plot, its poor acting, and its
+                lack of originality.
+                <br><br>
+                As a fan of Boll's previous movies based on video games, I was curious to see his new movie based on
+                reality. I have to say that I was pleasantly surprised by First Shift. It's not a masterpiece that will
+                change the world, as Boll claims, but it's an entertaining and thought-provoking horror movie that will
+                make you think twice about buying a car.
+                <br><br>
+                The movie has a lot of Boll's trademark elements: violence, blood, explosions, satire, and
+                self-referential jokes. The movie also has some nods to other horror movies such as Dawn of the Dead,
+                The Terminator, and The Purge. The movie does not take itself too seriously and has some moments of dark
+                humor that lighten up the mood.
+                <br><br>
+                The movie also has a strong message about the evils of the car industry and the dangers of consumerism.
+                The movie shows how cars are overpriced junk that we don't need and can't afford, how they are lying to
+                us about the benefits and costs of owning a car, how they are exploiting us and the environment for
+                their own profit, how they are destroying the planet and our wallet. The movie also shows how cars are
+                bad for our health, our happiness, our community, and our future. The movie makes us question our
+                dependence on cars and encourages us to switch to other modes of transportation such as public transit,
+                biking, walking, or car-sharing. The movie makes us realize that we don't need a car to live a good
+                life. We need to live a good life without a car.
+                <br><br>
+                The movie is not perfect, however. It has some flaws that prevent it from being a great horror movie.
+                The movie has a low budget, which shows in some scenes that look cheap and amateurish. The movie has a
+                clichéd plot, which follows the typical formula of a group of people trapped in a hostile environment
+                and picked off one by one by a relentless enemy. The movie has some poor acting, especially from some of
+                the supporting cast who deliver their lines with little emotion or conviction. The movie also lacks
+                originality, as it borrows heavily from other horror movies and does not offer anything new or
+                innovative.
+                <br><br>
+                Overall, I think First Shift is a decent horror movie that is worth watching for fans of Boll and the
+                genre. It's not a masterpiece, but it's not a disaster either. It's a fun and scary ride that will keep
+                you on the edge of your seat and make you think about the consequences of your car choices. I give it 3
+                out of 5 stars.
+                <br>
+            </p>
+            <div class="post-meta">
+                <img loading="lazy" class="author-image" src="https://th.bing.com/th/id/OIG.WDwYVfnN42RvKouBw46R"
+                    alt="Lisa van der Meer">
+                <div class="author-info">
+                    <p class="fade"><strong>About the Author:</strong></p>
+                    <p class="fade">Lisa van der Meer is a freelance writer and a fan of horror movies. She loves exciting stories
+                        that keep her on the edge of her seat. She lives in Amsterdam with her girlfriend and three
+                        dogs. She has been writing for The Esoteric Exponent since 2021.</p>
+                    <p class="post-date fade" data-offset="0"><em>Published: <span class="publish-time"></span></em></p>
+                </div>
+            </div>
+        </article>
+
+
+
+
+
+        <article class="post" lang="nl">
+            <h2 class="fade">
+                De Huidige Automarkt: Een Selectie Van Waardeloze Gamemodellen?
+            </h2>
+            <div class="img-container"><img
+                    src="https://cdn.discordapp.com/attachments/556249164900466688/1094172210136100884/The_Current_Car_Market_A_Roster_of_Shitty_Game_Models.png" />
+            </div>
+            <p class="fade">
+                <br>
+                De automarkt heeft de afgelopen jaren veel ups en downs doorgemaakt, dankzij de Covid-19-pandemie, het
+                wereldwijde chiptekort en de stijgende vraag naar elektrische voertuigen. Terwijl sommige experts een
+                stabilisatie en een prijsdaling in 2023 voorspellen, waarschuwen anderen voor een mogelijke recessie en
+                een aanhoudende verstoring van de toeleveringsketen. Hoe staat het met de huidige automarkt en wat
+                kunnen consumenten in de nabije toekomst verwachten?
+                <br><br>
+                Om deze vragen te beantwoorden, spraken we met Uwe Boll, een Duitse filmmaker die bekend staat om zijn
+                controversiële en kritisch gepande aanpassingen van videogamefranchises. Boll, die in 2016 stopte met
+                filmmaken om restaurateur te worden, maar in 2020 terugkeerde naar het regisseren, gaf ons zijn
+                openhartige mening over de huidige situatie en de uitdagingen die voor ons liggen.
+                <br><br>
+                "Kortom, de moderne auto is een rooster van waardeloze game-modellen waarvan geen van hen helemaal goed
+                is geproportioneerd of volledig logisch is", zei hij. "Vooral deze cross-overs die verschillende
+                voertuigtypes combineren. Ze zijn vis noch kip. Ze zijn niet sportief genoeg, niet ruim genoeg, niet
+                efficiënt genoeg, niet robuust genoeg. niemand."
+                <br><br>
+                Hij voegde eraan toe dat de automarkt ook wordt geplaagd door een gebrek aan innovatie en differentiatie
+                tussen merken en modellen. "De meeste auto's zien er tegenwoordig hetzelfde uit. Ze hebben dezelfde
+                kenmerken, dezelfde technologie, dezelfde designelementen. Er is geen persoonlijkheid, geen karakter,
+                geen ziel. Het zijn gewoon saaie dozen op wielen die iedereen proberen aan te spreken, maar eindigen
+                voor niemand aantrekkelijk."
+                <br><br>
+                Hij wijt deze situatie aan verschillende factoren, zoals de hoge kosten van onderzoek en ontwikkeling,
+                de strikte regelgeving en normen, de voorkeuren en verwachtingen van de consument en de concurrentie van
+                andere vervoerswijzen.
+                <br><br>
+                Hij wees er ook op dat de automarkt wordt geconfronteerd met een grote verstoring door het aanhoudende
+                tekort aan chips, wat de productie- en voorraadniveaus in de hele industrie heeft beïnvloed. "Het tekort
+                aan chips is een nachtmerrie voor autofabrikanten en dealers. Ze kunnen niet genoeg auto's maken om aan
+                de vraag te voldoen, ze kunnen geen kortingen of prikkels bieden om kopers aan te trekken, ze kunnen de
+                veranderende voorkeuren en trends van de consument niet bijhouden. Ze verliezen elke dag geld en
+                marktaandeel."
+                <br><br>
+                Hij zei dat hoewel sommige analisten verwachten dat het tekort aan chips medio 2023 zal afnemen, hij
+                niet zo optimistisch is. "Ik denk dat het langer gaat duren. De vraag naar chips komt niet alleen van
+                auto's, maar ook van smartphones, computers, gameconsoles, apparaten en andere apparaten. De
+                toeleveringsketen is complex en kwetsbaar, en elke verstoring kan rimpeleffecten tussen industrieën en
+                regio's. Het zal tijd en investeringen vergen om de capaciteit te vergroten en bronnen te
+                diversifiëren."
+                <br><br>
+                Hij zei ook dat hij verwacht dat de autoprijzen in 2023 hoog zullen blijven, ondanks enkele tekenen van
+                daling in de afgelopen maanden. "De autoprijzen zijn nog steeds historisch hoog, vooral voor nieuwe
+                auto's. De gemiddelde prijs voor nieuwe auto's aan het begin van 2023 is $ 49.388, wat ver boven het
+                budget van de meeste mensen ligt. Zelfs de prijzen van gebruikte auto's zijn hoog, hoewel ze sinds hun
+                introductie licht beginnen te dalen. piek in juni 2021. Maar ik denk niet dat ze snel significant
+                zullen dalen. Er is nog steeds veel vraag naar gebruikte auto's, vooral oudere en goedkopere auto's, die
+                moeilijk te vinden zijn. En er is nog veel onzekerheid over de economie en de rente, wat het
+                consumentenvertrouwen en de bestedingen kan aantasten."
+                <br><br>
+                Hij zei dat hij denkt dat elektrische voertuigen (EV's) in 2023 in populariteit en marktaandeel zullen
+                blijven groeien, ondanks enkele uitdagingen zoals hoge prijzen, beperkte actieradius, hiaten in de
+                infrastructuur en beleidswijzigingen. "EV's zijn de toekomst van mobiliteit. Ze zijn schoner, stiller,
+                sneller en slimmer dan auto's op gas. Ze hebben lagere onderhoudskosten en lagere brandstofkosten. Ze
+                krijgen meer prikkels en subsidies van overheden en nutsbedrijven. Ze hebben meer keuzes en opties van
+                verschillende merken en modellen. Ze hebben meer aantrekkingskracht en prestige bij consumenten die
+                deel willen uitmaken van een sociale beweging of een technologische revolutie."
+                <br><br>
+                Hij zei dat hij verwacht dat EV's in 2023 goed zullen zijn voor ongeveer 10% van de totale autoverkopen,
+                tegen ongeveer 6% in 2022. Hij zei dat hij denkt dat enkele van de belangrijkste EV-modellen om in 2023
+                op te letten de Kia EV9 zijn, een elektrische SUV met drie rijen die de eerste redelijk betaalbare optie
+                in zijn segment zal zijn, de Hyundai Ioniq 6, een gestroomlijnde elektrische sedan die zal wedijveren
+                met de Tesla Model 3 en de Volkswagen ID. Buzz, een retro-geïnspireerde elektrische bestelwagen die
+                nostalgie en plezier zal oproepen.
+                <br><br>
+                Hij zei dat hij niet geïnteresseerd is in het kopen van een van deze EV's, omdat hij de voorkeur geeft
+                aan auto's op gas vanwege hun eenvoud en betrouwbaarheid. "Ik vertrouw deze nieuwe technologieën niet.
+                Ze zijn te ingewikkeld, te duur, te riskant. Ze kunnen vlam vatten, ze kunnen zonder energie komen te
+                zitten, ze kunnen gehackt worden. Het zijn geen echte auto's. Het is gewoon speelgoed voor de rijken."
+                mensen die willen pronken."
+                <br><br>
+                Hij zei dat hij blij is met zijn huidige auto, een Honda Civic uit 2005, die hij voor ons heeft gekocht
+                <br>
+            </p>
+            <div class="post-meta">
+                <img loading="lazy" class="author-image" src="https://th.bing.com/th/id/OIG.LefP1kt53U0AevpC_Wxj"
+                    alt="Peter Vermeulen">
+                <div class="author-info">
+                    <p class="fade"><strong>Over de auteur:</strong></p>
+                    <p class="fade">Peter Vermeulen is een freelance schrijver en een liefhebber van auto’s. Hij volgt de laatste
+                        ontwikkelingen en trends op het gebied van de automarkt. Hij woont in Utrecht met zijn man en
+                        twee katten. Hij schrijft sinds 2020 voor De Esoterische Exponent.</p>
+                    <p class="post-date fade" data-offset="1463"><em>Gepubliceerd: <span class="publish-time"></span></em></p>
+                </div>
+            </div>
+        </article>
+
+        <article class="post" lang="en">
+            <h2 class="fade">
+                The Current Car Market: A Roster of Shitty Game Models?
+            </h2>
+            <div class="img-container"><img
+                    src="https://cdn.discordapp.com/attachments/556249164900466688/1094172210136100884/The_Current_Car_Market_A_Roster_of_Shitty_Game_Models.png" />
+            </div>
+            <p class="fade">
+                <br>
+                The car market has been through a lot of ups and downs in the past few years, thanks to the Covid-19
+                pandemic, the global chip shortage, and the rising demand for electric vehicles. While some experts
+                predict a stabilization and a decline in prices in 2023, others warn of a possible recession and a
+                continued supply chain disruption. What is the state of the current car market, and what can consumers
+                expect in the near future?
+                <br><br>
+                To answer these questions, we spoke to Uwe Boll, a German filmmaker who is known for his controversial
+                and critically panned adaptations of video game franchises. Boll, who retired from filmmaking in 2016 to
+                become a restaurateur, but returned to directing in 2020, gave us his candid opinion on the current
+                situation and the challenges ahead.
+                <br><br>
+                "Basically, the modern car is a roster of shitty game models where none of them are proportioned quite
+                right or fully make sense," he said. "Especially these crossovers that blend various vehicle types
+                together. They are neither fish nor fowl. They are not sporty enough, not spacious enough, not efficient
+                enough, not rugged enough. They are just mediocre compromises that try to please everyone but end up
+                pleasing no one."
+                <br><br>
+                He added that the car market is also plagued by a lack of innovation and differentiation among brands
+                and models. "Most cars look the same these days. They have the same features, the same technology, the
+                same design cues. There is no personality, no character, no soul. They are just bland boxes on wheels
+                that try to appeal to everyone but end up appealing to no one."
+                <br><br>
+                He blamed this situation on several factors, such as the high cost of research and development, the
+                strict regulations and standards, the consumer preferences and expectations, and the competition from
+                other modes of transportation.
+                <br><br>
+                He also pointed out that the car market is facing a major disruption from the ongoing chip shortage,
+                which has affected production and inventory levels across the industry. "The chip shortage is a
+                nightmare for car manufacturers and dealers. They can't make enough cars to meet demand, they can't
+                offer discounts or incentives to attract buyers, they can't keep up with changing consumer preferences
+                and trends. They are losing money and market share every day."
+                <br><br>
+                He said that while some analysts expect the chip shortage to ease by mid-2023, he is not so optimistic.
+                "I think it will take longer than that. The demand for chips is not only coming from cars, but also from
+                smartphones, computers, gaming consoles, appliances, and other devices. The supply chain is complex and
+                fragile, and any disruption can have ripple effects across industries and regions. It will take time and
+                investment to increase capacity and diversify sources."
+                <br><br>
+                He also said that he expects car prices to remain high in 2023, despite some signs of decline in recent
+                months. "Car prices are still historically high, especially for new cars. The average new car price at
+                the beginning of 2023 is $49,388, which is way above most people's budgets. Even used car prices are
+                high, although they have started to drop slightly since their peak in June 2021. But I don't think they
+                will drop significantly anytime soon. There is still a lot of demand for used cars, especially older and
+                cheaper ones, which are hard to find. And there is still a lot of uncertainty about the economy and
+                interest rates, which can affect consumer confidence and spending."
+                <br><br>
+                He said that he thinks electric vehicles (EVs) will continue to grow in popularity and market share in
+                2023, despite some challenges such as high prices, limited range, infrastructure gaps, and policy
+                changes. "EVs are the future of mobility. They are cleaner, quieter, faster, smarter than gas cars. They
+                have lower maintenance costs and lower fuel costs. They have more incentives and subsidies from
+                governments and utilities. They have more choices and options from different brands and models. They
+                have more appeal and prestige among consumers who want to be part of a social movement or a
+                technological revolution."
+                <br><br>
+                He said that he expects EVs to account for about 10% of total car sales in 2023, up from about 6% in
+                2022. He said that he thinks some of the most important EV models to watch out for in 2023 are the Kia
+                EV9, a three-row electric SUV that will be the first moderately affordable option in its segment, the
+                Hyundai Ioniq 6, a sleek electric sedan that will rival the Tesla Model 3, and the Volkswagen ID. Buzz,
+                a retro-inspired electric van that will evoke nostalgia and fun.
+                <br><br>
+                He said that he is not interested in buying any of these EVs, as he prefers gas-powered cars for their
+                simplicity and reliability. "I don't trust these new technologies. They are too complicated, too
+                expensive, too risky. They can catch fire, they can run out of juice, they can get hacked. They are not
+                real cars. They are just toys for rich people who want to show off."
+                <br><br>
+                He said that he is happy with his current car, a 2005 Honda Civic, which he bought used for $5,000.
+                "It's a great car. It's reliable, efficient, easy to maintain. It has everything I need and nothing I
+                don't. It's a classic."
+                <br><br>
+                He said that he thinks the car market will eventually collapse under its own weight, as consumers will
+                realize that they are being ripped off by greedy manufacturers and dealers. "The car market is a scam.
+                They are selling you overpriced junk that you don't need and can't afford. They are lying to you about
+                the benefits and costs of owning a car. They are exploiting you and the environment for their own
+                profit. They are destroying the planet and your wallet."
+                <br><br>
+                He said that he thinks people should stop buying cars altogether and switch to other modes of
+                transportation, such as public transit, biking, walking, or car-sharing. "Cars are a waste of money,
+                time, space, and resources. They are bad for your health, your happiness, your community, and your
+                future. They are obsolete and unnecessary. You don't need a car to live a good life. You need to live a
+                good life without a car."
+                <br><br>
+                He said that he hopes his upcoming movie, First Shift, will expose the dark side of the car industry and
+                inspire people to rethink their relationship with cars. "First Shift is a horror movie about a group of
+                workers who get trapped in a car factory overnight and have to fight for their lives against killer
+                robots and zombies. It's a metaphor for how the car industry is killing us and turning us into mindless
+                consumers. It's a wake-up call for humanity to stop being slaves to machines and start being masters of
+                our own destiny."
+                <br><br>
+                He said that he thinks his movie will be a hit with critics and audiences alike, unlike his previous
+                movies based on video games, which were widely panned and flopped at the box office. "My video game
+                movies were misunderstood by critics and audiences who didn't appreciate my artistic vision and my
+                social commentary. They were too dumb to get my genius. But First Shift is different. It's not based on
+                a video game. It's based on reality. It's a masterpiece that will change the world."
+                <br>
+            </p>
+            <div class="post-meta">
+                <img loading="lazy" class="author-image" src="https://th.bing.com/th/id/OIG.LefP1kt53U0AevpC_Wxj"
+                    alt="Peter Vermeulen">
+                <div class="author-info">
+                    <p class="fade"><strong>About the Author:</strong></p>
+                    <p class="fade">Peter Vermeulen is a freelance writer and a car enthusiast. He follows the latest developments
+                        and trends in the car market. He lives in Utrecht with his husband and two cats. He has been
+                        writing for The Esoteric Exponent since 2020.</p>
+                    <p class="post-date fade" data-offset="0"><em>Published: <span class="publish-time"></span></em></p>
+                </div>
+            </div>
+        </article>
+
+
+
+
+
+        <article class="post" lang="nl">
+            <h2 class="fade">
+                Sneeuwstorm en ijzel op komst: volgende week temperaturen tot -10 graden
+            </h2>
+            <div class="img-container"><img loading="lazy" src="https://th.bing.com/th/id/OIG.6rN49DYGcFjfxIKvsmVB" /></div>
+            <p class="fade">
+                <br>
+                Het lijkt erop dat de winter nog niet voorbij is in Nederland. Na een zachte en droge maartmaand, kunnen
+                we ons opmaken voor een koude en natte week. Volgens de weersverwachting van Weerplaza zullen de
+                temperaturen volgende week dalen tot -10 graden in sommige delen van het land.
+                <br><br>
+                De komende dagen blijft het nog redelijk, met af en toe een zonnetje en een matige wind. De
+                maximumtemperaturen liggen rond de 5 graden. Maar vanaf zondag slaat het weer om en wordt het guur en
+                glad. De wind neemt toe en de temperaturen dalen flink.
+                <br><br>
+                Op maandag wordt het al -2 graden in Amsterdam en -3 graden in Breda. Op dinsdag wordt het nog kouder,
+                met -5 graden in Utrecht en -6 graden in Maastricht. Op woensdag wordt het dieptepunt van de week
+                bereikt, met -10 graden in Eindhoven en -9 graden in Groningen.
+                <br><br>
+                De sneeuw begint te vallen en er is veel bewolking. Het wordt gevaarlijk weer om naar buiten te gaan en
+                te reizen. De wegen kunnen spekglad worden door de ijzel en de sneeuw. Er is kans op veel ongelukken en
+                files. Het openbaar vervoer kan grotendeels plat komen te liggen. De scholen kunnen gesloten worden.
+                <br><br>
+                Maar geniet er snel van, want het slechte weer duurt niet lang. Op donderdag neemt de sneeuwval af en
+                stijgt de temperatuur weer naar 0 graden. Op vrijdag wordt het nog warmer, met 4 graden en kans op
+                regen. Het weekend ziet er ook beter uit, met veel zon en 8 graden.
+                <br><br>
+                Dus pak je kans en profiteer van het winterse weer volgende week. Het is een unieke kans om te
+                schaatsen, te sleeën en sneeuwpoppen te maken.
+                <br>
+            </p>
+            <div class="post-meta">
+                <img loading="lazy" class="author-image" src="https://th.bing.com/th/id/OIG..bdYzzHBS8SfYS95_iXy" alt="Jan de Boer">
+                <div class="author-info">
+                    <p class="fade"><strong>Over de auteur:</strong></p>
+                    <p class="fade">Jan de Boer is een freelance schrijver en een liefhebber van het weer. Hij volgt de laatste
+                        ontwikkelingen en trends op het gebied van meteorologie. Hij woont in Rotterdam met zijn vrouw
+                        en drie kinderen. Hij schrijft sinds 2019 voor De Esoterische Exponent.</p>
+                    <p class="post-date fade" data-offset="301"><em>Gepubliceerd: <span class="publish-time"></span></em></p>
+                </div>
+            </div>
+        </article>
+
+        <article class="post" lang="en">
+            <h2 class="fade">
+                Snowstorm and freezing rain on the way: temperatures up to -10 degrees next week
+            </h2>
+            <div class="img-container"><img loading="lazy" src="https://th.bing.com/th/id/OIG.6rN49DYGcFjfxIKvsmVB" /></div>
+            <p class="fade">
+                <br>
+                It seems that winter is not over yet in the Netherlands. After a mild and dry March month, we can
+                prepare for a cold and wet week. According to the weather forecast from Weerplaza, the temperatures will
+                drop to -10 degrees in some parts of the country next week.
+                <br>
+                The next few days will still be reasonable, with occasional sunshine and a moderate wind. The maximum
+                temperatures are around 5 degrees. But from Sunday on, the weather will change and it will become harsh
+                and slippery. The wind increases and the temperatures drop sharply.
+                <br>
+                On Monday it will already be -2 degrees in Amsterdam and -3 degrees in Breda. On Tuesday it will get
+                even colder, with -5 degrees in Utrecht and -6 degrees in Maastricht. On Wednesday, the low point of the
+                week is reached, with -10 degrees in Eindhoven and -9 degrees in Groningen.
+                <br>
+                The snow starts to fall and there is a lot of cloud cover. It becomes dangerous weather to go outside
+                and travel. The roads can become very slippery due to the freezing rain and snow. There is a chance of
+                many accidents and traffic jams. Public transport can largely come to a standstill. The schools may be
+                closed.
+                <br>
+                But enjoy it quickly, because the bad weather won’t last long. On Thursday, the snowfall decreases and
+                the temperature rises again to 0 degrees. On Friday it gets even warmer, with 4 degrees and a chance of
+                rain. The weekend also looks better, with a lot of sun and 8 degrees.
+                <br><br>
+                So take your chance and take advantage of the winter weather next week. It is a unique opportunity to
+                skate, sled and make snowmen.
+                <br>
+            </p>
+            <div class="post-meta">
+                <img loading="lazy" class="author-image" src="https://th.bing.com/th/id/OIG..bdYzzHBS8SfYS95_iXy" alt="Jan de Boer">
+                <div class="author-info">
+                    <p class="fade"><strong>About the Author:</strong></p>
+                    <p class="fade">Jan de Boer is a freelance writer and a lover of the weather. He follows the latest developments
+                        and trends in the field of meteorology. He lives in Rotterdam with his wife and three children.
+                        He has been writing for The Esoteric Exponent since 2019.</p>
+                    <p class="post-date fade" data-offset="0"><em>Published: <span class="publish-time"></span></em></p>
+                </div>
+            </div>
+        </article>
+
+
+
+
+
+        <article class="post" lang="nl">
+            <h2 class="fade">
+                TikTok-ster onthult dat ze een alien is: "Ik kom van de planeet Zorgon"
+            </h2>
+            <div class="img-container"><img loading="lazy" src="https://th.bing.com/th/id/OIG.HXEi9lE5TlwnQnyuVorG" /></div>
+            <p class="fade">
+                <br>
+                Een TikTok-ster heeft voor opschudding gezorgd door te onthullen dat ze een alien is. Lisa Smith, die
+                meer dan 10 miljoen volgers heeft op het populaire socialemediaplatform, maakte de schokkende bekentenis
+                in een video die viraal ging.
+                <br><br>
+                In de video, die meer dan 100 miljoen keer bekeken is, zegt Smith dat ze niet van de aarde komt, maar
+                van de planeet Zorgon, die zich in een ander sterrenstelsel bevindt. Ze zegt dat ze naar de aarde is
+                gestuurd om de mensheid te observeren en te beïnvloeden.
+                <br><br>
+                "Ik weet dat dit moeilijk te geloven is, maar het is de waarheid", zegt Smith in de video. "Ik ben een
+                alien en ik kom van de planeet Zorgon. Ik ben hier al sinds ik een baby was. Mijn ouders zijn ook aliens
+                en ze hebben me geadopteerd door een menselijk stel."
+                <br><br>
+                Smith zegt dat ze eruitziet als een normaal meisje, maar dat ze in werkelijkheid een speciaal pak draagt
+                dat haar uiterlijk verandert. Ze zegt dat ze haar ware vorm kan laten zien door een knopje op haar oor
+                te drukken. Ze doet dit vervolgens en verandert in een groen wezen met grote ogen en antennes.
+                <br><br>
+                "Ik hoop dat jullie me niet haten of bang voor me zijn", zegt Smith. "Ik hou van jullie allemaal en ik
+                wil jullie helpen om betere mensen te worden. Ik heb veel geleerd van jullie cultuur en ik heb veel
+                plezier gehad met het maken van TikTok-video's. Maar nu is het tijd om eerlijk te zijn."
+                <br><br>
+                Smith zegt dat ze haar missie op aarde bijna heeft voltooid en dat ze binnenkort terug moet naar haar
+                thuisplaneet. Ze zegt dat ze nog een paar dagen heeft om afscheid te nemen van haar vrienden en fans. Ze
+                zegt dat ze hoopt dat ze haar zullen blijven volgen op TikTok, waar ze meer zal vertellen over haar
+                leven als alien.
+                <br><br>
+                De video van Smith heeft voor veel reacties gezorgd op TikTok en andere sociale media. Sommige mensen
+                geloven haar verhaal en prijzen haar voor haar moed en eerlijkheid. Anderen denken dat het een grap of
+                een stunt is om meer aandacht te krijgen. Weer anderen maken zich zorgen over haar geestelijke
+                gezondheid en vragen zich af of ze hulp nodig heeft.
+                <br><br>
+                Smith heeft nog niet gereageerd op de reacties op haar video. Ze heeft wel een nieuwe video geplaatst
+                waarin ze laat zien hoe ze zich klaarmaakt voor haar terugreis naar Zorgon. Ze zegt dat ze een speciaal
+                ruimteschip heeft dat verborgen is in haar achtertuin. Ze zegt dat ze binnenkort zal vertrekken en dat
+                ze iedereen zal missen.
+                <br>
+            </p>
+            <div class="post-meta">
+                <img loading="lazy" class="author-image" src="https://th.bing.com/th/id/OIG.4c.uVvpPOKg88nLyl8dU" alt="Tom Jansen">
+                <div class="author-info">
+                    <p class="fade"><strong>Over de auteur:</strong></p>
+                    <p class="fade">Tom Jansen is een freelance schrijver en een fan van TikTok. Hij volgt de laatste trends en
+                        nieuwtjes op het socialemediaplatform. Hij woont in Utrecht met zijn hond Max. Hij schrijft
+                        sinds 2021 voor De Esoterische Exponent.</p>
+                    <p class="post-date fade" data-offset="3124"><em>Gepubliceerd: <span class="publish-time"></span></em></p>
+                </div>
+            </div>
+        </article>
+
+        <article class="post" lang="en">
+            <h2 class="fade">
+                TikTok star reveals that she is an alien: "I come from the planet Zorgon"
+            </h2>
+            <div class="img-container"><img loading="lazy" src="https://th.bing.com/th/id/OIG.HXEi9lE5TlwnQnyuVorG" /></div>
+            <p class="fade">
+                <br>
+                A TikTok star has caused a stir by revealing that she is an alien. Lisa Smith, who has more than 10
+                million followers on the popular social media platform, made the shocking confession in a video that
+                went viral.
+                <br><br>
+                In the video, which has been viewed more than 100 million times, Smith says that she is not from Earth,
+                but from the planet Zorgon, which is located in another galaxy. She says that she was sent to Earth to
+                observe and influence humanity.
+                <br><br>
+                "I know this is hard to believe, but it’s the truth," Smith says in the video. "I’m an alien and I come
+                from the planet Zorgon. I’ve been here since I was a baby. My parents are also aliens and they adopted
+                me by a human couple.""
+                <br><br>
+                Smith says that she looks like a normal girl, but that she actually wears a special suit that changes
+                her appearance. She says that she can show her true form by pressing a button on her ear. She then does
+                this and turns into a green creature with big eyes and antennas.
+                <br><br>
+                "I hope you don’t hate me or be afraid of me," Smith says. "I love you all and I want to help you become
+                better people. I’ve learned a lot from your culture and I’ve had a lot of fun making TikTok videos. But
+                now it’s time to be honest."
+                <br><br>
+                Smith says that she has almost completed her mission on Earth and that she will soon have to return to
+                her home planet. She says that she has a few days left to say goodbye to her friends and fans. She says
+                that she hopes they will continue to follow her on TikTok, where she will tell more about her life as an
+                alien.
+                <br><br>
+                Smith’s video has caused a lot of reactions on TikTok and other social media. Some people believe her
+                story and praise her for her courage and honesty. Others think it’s a joke or a stunt to get more
+                attention. Still others are concerned about her mental health and wonder if she needs help.
+                <br><br>
+                Smith has not responded to the comments on her video. She did post a new video showing how she is
+                getting ready for her return trip to Zorgon. She says that she has a special spaceship that is hidden in
+                her backyard. She says that she will leave soon and that she will miss everyone.
+                <br>
+            </p>
+            <div class="post-meta">
+                <img loading="lazy" class="author-image" src="https://th.bing.com/th/id/OIG.4c.uVvpPOKg88nLyl8dU" alt="Tom Jansen">
+                <div class="author-info">
+                    <p class="fade"><strong>About the Author:</strong></p>
+                    <p class="fade">Tom Jansen is a freelance writer and a fan of TikTok. He follows the latest trends and news on
+                        the social media platform. He lives in Utrecht with his dog Max. He has been writing for De
+                        Lachende Lepel since 2021.</p>
+                    <p class="post-date fade" data-offset="0"><em>Published: <span class="publish-time"></span></em></p>
+                </div>
+            </div>
+            </article>
+
+
+
+
+
+            <article class="post" lang="nl">
+                <h2 class="fade">
+                    Ex-Michelin restaurant De Zwaan in Etten-Leur sluit definitief de deuren: "Het is een triest einde
+                    van een mooi verhaal"
+                </h2>
+                <div class="img-container"><img loading="lazy" src="https://th.bing.com/th/id/OIG.bZwMS574PfuoZ6sEBh.X" /></div>
+                <p class="fade">
+                    <br>
+                    Het is definitief: De Zwaan, het voormalige sterrenrestaurant in Etten-Leur, gaat niet meer open.
+                    Dat heeft eigenaar Roland Peijnenburg bekendgemaakt. Hij zegt dat hij geen andere keuze heeft dan de
+                    zaak te sluiten na de coronacrisis en de brand die het pand vorig jaar verwoestte.
+                    <br><br>
+                    De Zwaan was een begrip in de Nederlandse gastronomie. Het restaurant bestond al sinds 1623 en kreeg
+                    in 1992 een Michelinster, die het tot 2019 behield. Het stond bekend om zijn klassieke Franse keuken
+                    met een moderne twist en zijn uitgebreide wijnkaart.
+                    <br><br>
+                    Peijnenburg nam het restaurant over in 1986 en bouwde het uit tot een succesvolle onderneming met
+                    meerdere zaken, waaronder een bistro, een hotel en een feestzaal. Hij had ook plannen om het pand te
+                    verbouwen en te moderniseren.
+                    <br><br>
+                    Maar toen sloeg het noodlot toe. In maart 2020 moest De Zwaan de deuren sluiten vanwege de
+                    coronamaatregelen. Peijnenburg probeerde nog om afhaalmaaltijden aan te bieden, maar dat bleek niet
+                    rendabel te zijn. In november 2020 brak er een grote brand uit in het pand, die het grotendeels
+                    verwoestte. De oorzaak van de brand is nog steeds niet bekend.
+                    <br><br>
+                    Peijnenburg hoopte nog om het restaurant te heropenen na de brand, maar dat bleek onmogelijk te
+                    zijn. Hij zegt dat hij geen verzekering had voor de schade en dat hij geen financiële steun kreeg
+                    van de overheid of de banken. Hij zegt dat hij alles kwijt is wat hij in 35 jaar heeft opgebouwd.
+                    <br><br>
+                    "Het is een triest einde van een mooi verhaal", zegt hij. "Ik heb met veel plezier en passie gewerkt
+                    in De Zwaan en ik ben trots op wat we hebben bereikt. Ik wil al mijn medewerkers, leveranciers en
+                    gasten bedanken voor hun steun en vertrouwen. Het doet me pijn om afscheid te nemen, maar ik heb
+                    geen andere keuze."
+                    <br><br>
+                    Peijnenburg zegt dat hij niet weet wat hij nu gaat doen. Hij zegt dat hij nog te jong is om met
+                    pensioen te gaan, maar dat hij ook geen zin heeft om opnieuw te beginnen. Hij zegt dat hij eerst
+                    tijd nodig heeft om alles te verwerken en dan wel zal zien wat de toekomst brengt.
+                    <br>
+                </p>
+                <div class="post-meta">
+                    <img loading="lazy" class="author-image" src="https://th.bing.com/th/id/OIG..c3rSey1FdnCsDwzIu6l"
+                        alt="Lisa van der Meer">
+                    <div class="author-info">
+                        <p class="fade"><strong>Over de auteur:</strong></p>
+                        <p class="fade">Lisa van der Meer is een freelance schrijfster en een liefhebber van lekker eten. Ze schrijft
+                            regelmatig over restaurants, recepten en culinaire trends voor verschillende media. Ze woont
+                            in Breda met haar man en twee kinderen. Ze schrijft sinds 2018 voor De Esoterische Exponent.</p>
+                        <p class="post-date fade" data-offset="155"><em>Gepubliceerd: <span class="publish-time"></span></em></p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="post" lang="en">
+                <h2 class="fade">
+                    Ex-Michelin restaurant De Zwaan in Etten-Leur closes its doors for good: "It is a sad end to a
+                    beautiful story"
+                </h2>
+                <div class="img-container"><img loading="lazy" src="https://th.bing.com/th/id/OIG.bZwMS574PfuoZ6sEBh.X" /></div>
+                <p class="fade">
+                    <br>
+                    It’s official: De Zwaan, the former star restaurant in Etten-Leur, will not reopen. That’s what
+                    owner Roland Peijnenburg announced. He says he has no choice but to close the business after the
+                    corona crisis and the fire that destroyed the building last year.
+                    <br><br>
+                    De Zwaan was a concept in Dutch gastronomy. The restaurant had existed since 1623 and received a
+                    Michelin star in 1992, which it retained until 2019. It was known for its classic French cuisine
+                    with a modern twist and its extensive wine list.
+                    <br><br>
+                    Peijnenburg took over the restaurant in 1986 and built it into a successful business with multiple
+                    businesses, including a bistro, a hotel and a party hall. He also had plans to renovate and
+                    modernize the building.
+                    <br><br>
+                    But then disaster struck. In March 2020, De Zwaan had to close its doors due to the corona measures.
+                    Peijnenburg tried to offer takeout meals, but that turned out to be unprofitable. In November 2020,
+                    a large fire broke out in the building, which largely destroyed it. The cause of the fire is still
+                    unknown.
+                    <br><br>
+                    Peijnenburg still hoped to reopen the restaurant after the fire, but that turned out to be
+                    impossible. He says he had no insurance for the damage and that he received no financial support
+                    from the government or the banks. He says he lost everything he built up in 35 years.
+                    <br><br>
+                    "It’s a sad end to a beautiful story," he says. "I worked with pleasure and passion in De Zwaan and
+                    I’m proud of what we achieved. I want to thank all my employees, suppliers and guests for their
+                    support and trust. It hurts me to say goodbye, but I have no other choice."
+                    <br><br>
+                    Peijnenburg says he doesn’t know what he’s going to do now. He says he’s too young to retire, but he
+                    also doesn’t feel like starting over. He says he first needs time to process everything and then
+                    he’ll see what the future brings.
+                    <br>
+                </p>
+                <div class="post-meta">
+                    <img loading="lazy" class="author-image" src="https://th.bing.com/th/id/OIG..c3rSey1FdnCsDwzIu6l"
+                        alt="Lisa van der Meer">
+                    <div class="author-info">
+                        <p class="fade"><strong>About the Author:</strong></p>
+                        <p class="fade">Lisa van der Meer is a freelance writer and a lover of good food. She regularly writes about
+                            restaurants, recipes and culinary trends for various media. She lives in Breda with her
+                            husband and two children. She has been writing for De Esoterische Exponent since 2018.</p>
+                        <p class="post-date fade" data-offset="0"><em>Published: <span class="publish-time"></span></em></p>
+                    </div>
+                </div>
+                </article>
+
+
+
+
+
+                <article class="post" lang="nl">
+                    <h2 class="fade">
+                        Gordon Ramsay breekt uit in tranen na het eten van wasabi: "Het is alsof je in je neus
+                        gepenetreerd wordt door een demoon"
+                    </h2>
+                    <div class="img-container"><img loading="lazy" src="https://th.bing.com/th/id/OIG.2qb0P_f_jtHAM7H6Etxj" /></div>
+                    <p class="fade">
+                        <br>
+                        Gordon Ramsay, de beroemde chef-kok en tv-persoonlijkheid die bekend staat om zijn scherpe
+                        kritiek en grove taalgebruik, heeft een onvergetelijke ervaring gehad met wasabi, de pittige
+                        Japanse mierikswortel.
+                        <br><br>
+                        In een recente aflevering van zijn show Gordon Ramsay's Ultimate Cookery Course, besloot hij om
+                        een unieke combinatie van Mexicaanse en Japanse smaken te proberen: rundvlees taco's met wasabi
+                        mayonaise.
+                        <br><br>
+                        Hij bereidde de taco's met verse ingrediënten en maakte de wasabi mayonaise zelf door wasabi
+                        pasta te mengen met mayonaise, limoensap en koriander. Hij leek tevreden met het resultaat en
+                        presenteerde het aan zijn gasten met trots.
+                        <br><br>
+                        Echter, toen hij een hap nam van zijn eigen creatie, gebeurde er iets onverwachts. Hij begon te
+                        hoesten, te niezen en te tranen. Hij greep naar zijn neus en schreeuwde: "Het is alsof je in je
+                        neus gepenetreerd wordt door een demoon!"
+                        <br><br>
+                        Zijn gasten waren geschokt en bezorgd. Ze probeerden hem te kalmeren en hem water aan te bieden.
+                        Maar Ramsay weigerde elke hulp en rende naar de badkamer. Daar bleef hij voor een lange tijd,
+                        terwijl hij zijn neus spoelde met koud water.
+                        <br><br>
+                        Later verklaarde hij dat hij per ongeluk te veel wasabi had gebruikt in zijn mayonaise en dat
+                        hij de pittigheid had onderschat. Hij zei dat hij nog nooit zoiets had meegemaakt en dat hij
+                        zich schaamde voor zijn reactie.
+                        <br><br>
+                        Hij bood zijn excuses aan aan zijn gasten en aan de kijkers thuis. Hij zei dat hij vanaf nu
+                        voorzichtiger zou zijn met wasabi en andere pittige ingrediënten. Hij zei ook dat hij hoopte dat
+                        zijn fans hem zouden vergeven voor zijn blunder.
+                        <br><br>
+                        Hij sloot af met een grapje: "Ik denk dat ik nu weet hoe Harry Potter zich voelde toen hij de
+                        peperduivelsneus snoepjes at."
+                        <br>
+                    </p>
+                    <div class="post-meta">
+                        <img loading="lazy" class="author-image" src="https://th.bing.com/th/id/OIG.jWM203Gj5v1RcXQDY2wa"
+                            alt="Bart van der Zee">
+                        <div class="author-info">
+                            <p class="fade"><strong>Over de auteur:</strong></p>
+                            <p class="fade">Bart van der Zee is een freelance schrijver en een grote fan van Gordon Ramsay. Hij houdt
+                                van koken, eten en humor. Hij woont in Amsterdam met zijn kat Peper. Hij schrijft sinds
+                                2020 voor De Esoterische Exponent.</p>
+                            <p class="post-date fade" data-offset="2349"><em>Gepubliceerd: <span class="publish-time"></span></em></p>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post" lang="en">
+                    <h2 class="fade">
+                        Gordon Ramsay breaks down in tears after eating wasabi: "It’s like being penetrated in your nose
+                        by a demon"
+                    </h2>
+                    <div class="img-container"><img loading="lazy" src="https://th.bing.com/th/id/OIG.2qb0P_f_jtHAM7H6Etxj" /></div>
+                    <p class="fade">
+                        <br>
+                        Gordon Ramsay, the famous chef and TV personality who is known for his sharp criticism and
+                        coarse language, had an unforgettable experience with wasabi, the spicy Japanese horseradish.
+                        <br><br>
+                        In a recent episode of his show Gordon Ramsay’s Ultimate Cookery Course, he decided to try a
+                        unique combination of Mexican and Japanese flavors: beef tacos with wasabi mayonnaise.
+                        <br><br>
+                        He prepared the tacos with fresh ingredients and made the wasabi mayonnaise himself by mixing
+                        wasabi paste with mayonnaise, lime juice and cilantro. He seemed satisfied with the result and
+                        presented it to his guests with pride.
+                        <br><br>
+                        However, when he took a bite of his own creation, something unexpected happened. He started
+                        coughing, sneezing and tearing up. He grabbed his nose and screamed: "It’s like being penetrated
+                        in your nose by a demon!"
+                        <br><br>
+                        His guests were shocked and concerned. They tried to calm him down and offer him water. But
+                        Ramsay refused any help and ran to the bathroom. There he stayed for a long time, while he
+                        rinsed his nose with cold water.
+                        <br><br>
+                        Later he explained that he accidentally used too much wasabi in his mayonnaise and that he
+                        underestimated the spiciness. He said that he had never experienced anything like this and that
+                        he was ashamed of his reaction.
+                        <br><br>
+                        He apologized to his guests and to the viewers at home. He said that from now on he would be
+                        more careful with wasabi and other spicy ingredients. He also said that he hoped that his fans
+                        would forgive him for his blunder.
+                        <br><br>
+                        He ended with a joke: "I think I now know how Harry Potter felt when he ate the pepper devil’s
+                        nose candies."
+                        <br>
+                    </p>
+                    <div class="post-meta">
+                        <img loading="lazy" class="author-image" src="https://th.bing.com/th/id/OIG.jWM203Gj5v1RcXQDY2wa"
+                            alt="Bart van der Zee">
+                        <div class="author-info">
+                            <p class="fade"><strong>About the Author:</strong></p>
+                            <p class="fade">Bart van der Zee is a freelance writer and a big fan of Gordon Ramsay. He loves cooking,
+                                eating and humor. He lives in Amsterdam with his cat Pepper. He has been writing for De
+                                Lachende Lepel since 2020.</p>
+                            <p class="post-date fade" data-offset="0"><em>Published: <span class="publish-time"></span></em></p>
+                        </div>
+                    </div>
+                </article>
+                <footer>
+                    <small>Powered by ChatGPT</small>
+                </footer>     
+            </div>
+        </div>
+    </div>
+    <script defer>
+// Get the toggle switch element by its ID
+const toggle = document.getElementById('toggle');
+
+// Add an event listener to the toggle switch that changes the language displayed on the page
+toggle.addEventListener('change', function() {
+  // Determine which language to show and which to hide based on the toggle switch's state
+  const langToShow = toggle.checked ? 'nl' : 'en';
+  const langToHide = toggle.checked ? 'en' : 'nl';
+
+
+  // Get all elements with the language to show and hide
+  const elementsToShow = document.querySelectorAll('[lang=' + langToShow + ']');
+  const elementsToHide = document.querySelectorAll('[lang=' + langToHide + ']');
+
+  // Loop through each element to show and set its display property to block
+  elementsToShow.forEach(function(element) {
+    element.style.display = 'block';
+  });
+
+  // Loop through each element to hide and set its display property to none
+  elementsToHide.forEach(function(element) {
+    element.style.display = 'none';
+
+  // Set the title based on the toggle switch's state
+  const title = toggle.checked ? 'De Esoterische Exponent' : 'The Esoteric Exponent';
+  document.title = title;
+
+  });
+});
+    </script>
+    <script defer>
+// Format a date object as a string
+function formatDate(date, lang) {
+  // Set options for the date string
+  const options = { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric' };
+  // Return the formatted date string
+  return date.toLocaleDateString(lang, options);
+}
+
+// Get the offset from a data attribute on an element
+function getOffsetInMinutes(el) {
+  return parseInt(el.dataset.offset);
+}
+
+// Process all post date elements on the page
+function processPostDateElements() {
+  // Get all post date elements
+  const postDateEls = document.querySelectorAll('p.post-date');
+  // Initialize the previous offset variable to 0
+  let previousOffset = 0;
+  // Loop over each post date element
+  postDateEls.forEach((el) => {
+    // Get the language of the article containing the post date element
+    const lang = el.closest('article').lang;
+    // Get the offset of the post date element
+    const offset = getOffsetInMinutes(el);
+    // Get the current date and time
+    const currentDate = new Date();
+    // Adjust the date and time based on the offset and previous offset
+    const adjustedDate = new Date(currentDate - ((offset - previousOffset) * 60000));
+    // Update the previous offset to the current offset
+    previousOffset -= offset;
+    // Format the adjusted date and time as a string
+    const formattedDate = formatDate(adjustedDate, lang);
+    // Update the post date element with the formatted date and time
+    el.querySelector('.publish-time').textContent = formattedDate;
+  });
+}
+
+// Call the processPostDateElements function to update all post date elements on page load
+processPostDateElements();
+    </script>
+</body>
+</html>
